@@ -17,9 +17,9 @@ public class GUI {
         frame.setTitle("BART Predictions LEDs");
         frame.pack();
         frame.setVisible(true);
-        frame.setSize(200*8 + 10, 50*8 + 100);
+        frame.setSize(150*8 + 10, 50*8 + 100);
 
-        DotMatrixBoard dotMatrixBoard = new DotMatrixBoard(50, 200);
+        DotMatrixBoard dotMatrixBoard = new DotMatrixBoard(50, 150);
 
         panel.add(dotMatrixBoard);
     }
