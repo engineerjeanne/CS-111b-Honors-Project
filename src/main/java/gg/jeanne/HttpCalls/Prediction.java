@@ -1,5 +1,7 @@
 package gg.jeanne.HttpCalls;
 
+import java.util.Arrays;
+
 public class Prediction {
 
     private final String line;
@@ -14,11 +16,10 @@ public class Prediction {
         this.minutes = new int[]{0, 0};
     }
 
-    public Prediction addMinutes(int min) {
+    public void addMinutes(int min) {
         if(this.minutes[0] == 0) this.minutes[0] = min;
         else this.minutes[1] = min;
 
-        return this;
     }
 
     public String getLine() {
@@ -37,4 +38,13 @@ public class Prediction {
         return this.carriages;
     }
 
+    @Override
+    public String toString() {
+        return "Prediction{" +
+                "line='" + line + '\'' +
+                ", destination='" + destination + '\'' +
+                ", minutes=" + Arrays.toString(minutes) +
+                ", carriages=" + carriages +
+                '}';
+    }
 }

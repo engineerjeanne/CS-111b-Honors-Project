@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 
 public class GUI {
+    private final DotMatrixBoard dotMatrixBoard;
 
     /**
      * This will be modified to make the Main class be able to communicate with the DotMatrixBoard.
@@ -20,11 +21,16 @@ public class GUI {
         frame.setTitle("BART Predictions LEDs");
         frame.pack();
         frame.setVisible(true);
-        frame.setSize(150*8 + 10, 51*8 + 100);
+        frame.setSize(150*8 + 10, 51*8 + 10);
 
-        DotMatrixBoard dotMatrixBoard = new DotMatrixBoard(50, 150);
+        this.dotMatrixBoard = new DotMatrixBoard(50, 150);
 
         panel.add(dotMatrixBoard);
     }
+
+    public DotMatrixBoard getDotMatrixBoard() {
+        return this.dotMatrixBoard;
+    }
+
 
 }

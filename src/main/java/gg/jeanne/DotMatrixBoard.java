@@ -36,46 +36,35 @@ public class DotMatrixBoard extends JPanel {
         setBackground(Color.getHSBColor(3, 0.667f, 0.129f));
 
         // Test data
-        ArrayList<String> test = new ArrayList<>();
-        test.add("SFO/MILLBRAE<split/> 3, 23 MIN");
-        test.add("6-CAR, RD-LINE");
-        test.add("<hr6/>");
-        test.add("SF AIRPORT<split/> 7, 15 MIN");
-        test.add("8-CAR, YL-LINE");
-        queue.add(test);
-
-        ArrayList<String> test2 = new ArrayList<>();
-        test2.add("<hr6/>");
-        test2.add("WELCOME TO BART.");
-        test2.add("THANKS FOR RIDING BART.");
-        test2.add("<hr6/>");
-        test2.add("<hr6/>");
-        test2.add("JEANNE IS THE BEST CODER.");
-        queue.add(test2);
-
         // Start the queue handler
         SwingUtilities.invokeLater(this::handleQueueRecursively);
+    }
+
+    public void addToQueue(ArrayList<String> q) {
+        this.queue.add(q);
     }
 
     public void handleQueueRecursively() {
         if (this.queue.isEmpty()) {
             try {
-                Thread.sleep(10000);
+                Thread.sleep(100);
             } catch (InterruptedException ignored) { }
 
             handleQueueRecursively();
         }
 
-        // Safely retrieve the first ArrayList<String> from the queue
-        ArrayList<String> inQueue = this.queue.remove(0);
+        try {
+            // Safely retrieve the first ArrayList<String> from the queue
+            ArrayList<String> inQueue = this.queue.remove(0);
 
-        clearBoard();
+            clearBoard();
 
-        // Process the current ArrayList<String> entirely before moving on to the next one
-        processMessages(inQueue, () -> {
-            // After finishing the current array, scroll and then move to the next array in the queue
-            startAutoScroll(150, inQueue.size() * 10, this::handleQueueRecursively);
-        });
+            // Process the current ArrayList<String> entirely before moving on to the next one
+            processMessages(inQueue, () -> {
+                // After finishing the current array, scroll and then move to the next array in the queue
+                startAutoScroll(150, inQueue.size() * 10, this::handleQueueRecursively);
+            });
+        } catch(IndexOutOfBoundsException ignored) {}
     }
 
     // Sequentially display all messages from the given ArrayList
